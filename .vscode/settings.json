@@ -5,7 +5,7 @@
       {
         "match": ".*",
         "isAsync": true,
-        "cmd": "git add -A && git commit -m \"${fileBasename} updated\" && git push"
+        "cmd": "git add -A && git commit -m \"auto: update ${fileBasename}\" && git push"
       },
     ]
   }
