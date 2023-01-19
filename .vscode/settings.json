@@ -1,0 +1,12 @@
+{
+  "python.analysis.typeCheckingMode": "basic",
+  "emeraldwalk.runonsave": {
+    "commands": [
+      {
+        "match": ".*",
+        "isAsync": true,
+        "cmd": "git add -A && git commit -m \"auto: update ${fileBasename}\" && git push"
+      },
+    ]
+  }
+}
