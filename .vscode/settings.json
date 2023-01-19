@@ -3,6 +3,7 @@
   "emeraldwalk.runonsave": {
     "commands": [
       {
+        // For any file in any folder
         "match": ".*",
         "isAsync": true,
         "cmd": "git add -A && git commit -m \"${fileBasename} updated\" && git push"
