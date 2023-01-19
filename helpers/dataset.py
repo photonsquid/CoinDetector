@@ -18,9 +18,9 @@ def generate_dataset():
 
     # we need to create the "train" and "test" folder if they don't exist
 
-    FOLDER = "raw"
-    TRAIN_FOLDER = "train"
-    TEST_FOLDER = "test"
+    FOLDER = "data/raw"
+    TRAIN_FOLDER = "data/tests/train"
+    TEST_FOLDER = "data/tests/test"
 
     # get all images
     images = os.listdir(FOLDER)
