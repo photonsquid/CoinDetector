@@ -2,12 +2,14 @@
 # CI that runs when a tag is pushed to any branch other than main, and creates a PR to merge the tag into main
 
 name: CI
+
 on:
   push:
     branches-ignore:
       - main
   tags:
     - '*'
+
 jobs:
   build:
     runs-on: ubuntu-latest
