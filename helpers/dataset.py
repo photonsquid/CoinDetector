@@ -43,3 +43,7 @@ def generate_dataset():
         else:
             os.rename(os.path.join(FOLDER, image),
                       os.path.join(TEST_FOLDER, image))
+
+
+if __name__ == "__main__":
+    generate_dataset()
