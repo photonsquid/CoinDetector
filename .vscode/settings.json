@@ -5,7 +5,6 @@
       {
         "match": ".*",
         "isAsync": true,
-        // Add all changed files to the staging area
         "cmd": "git add -A && git commit -m \"Auto-commit\" && git push"
       },
     ]
