@@ -6,7 +6,6 @@ name: CI
     push:
     branches-ignore:
       - main
-
     tags:
       - '*'
   jobs:
