@@ -1,6 +1,7 @@
 from keras.layers import Layer
 
 
+# L1 distance layer
 class L1Dist(Layer):
 
     # Init method - inheritance
