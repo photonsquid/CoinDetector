@@ -175,6 +175,6 @@ if __name__ == "__main__":
     # pwd
     print(os.getcwd())
     # load the dataset
-    dataset = load_data('../data/tests')
+    # dataset = load_data('../data/tests')
     # create the pairs
-    images_pairs = create_pairs(dataset)
+    # images_pairs = create_pairs(dataset)
