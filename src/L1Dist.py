@@ -1,3 +1,6 @@
+from tensorflow.keras.layers import Layer
+
+
 class L1Dist(Layer):
 
     # Init method - inheritance
