@@ -13,7 +13,7 @@ def execute(command, show_output=False):
     return output
 
 
-def git_update(branch: str = "main", force: bool = False):
+def git_update(branch: str = "main", force: bool = False, show_output: bool = False):
     """Update the git repository"""
     execute('git fetch --all')
     execute('git checkout {}'.format(branch))
