@@ -70,7 +70,7 @@ def create_pairs(dataset):
         # get the country, value, specificity and id of the image
         country = image["objects"]["country"]
         value = image["objects"]["value"]
-        specificity = image["objects"]["specificity"] if image["objects"]["specificity"] != "" else "null"
+        specificity = image["objects"]["edition"]
         id = image["objects"]["id"]
 
         # if the country is not in the countries list, add it
