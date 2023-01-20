@@ -172,8 +172,6 @@ def create_pairs(dataset):
 if __name__ == "__main__":
     from helpers.load_data import load_data
 
-    # pwd
-    print(os.getcwd())
     # load the dataset
     dataset = load_data('data/tests')
     # create the pairs
