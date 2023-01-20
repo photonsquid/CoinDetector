@@ -151,8 +151,12 @@ def create_pairs(dataset):
 
 if __name__ == "__main__":
     from helpers.load_data import load_data
-
-    # load the dataset
-    dataset = load_data('data/tests')
+    testing = False
+    if testing == True:
+        # load the dataset
+        dataset = load_data('data/tests')
+    else:
+        from datasets.load import load_dataset
+        dataset = load_dataset('photonsquid/coins-euro')
     # create the pairs
     images_pairs = create_pairs(dataset['train'])
