@@ -187,3 +187,12 @@ def create_pairs(dataset):
                         (image["image"], validation_image["image"], computed_label))
 
     return images_pairs
+
+
+if __main__ == "__name__":
+    from helpers.load_data import load_data
+
+    # load the dataset
+    dataset = load_data('../data/tests')
+    # create the pairs
+    images_pairs = create_pairs(dataset)
