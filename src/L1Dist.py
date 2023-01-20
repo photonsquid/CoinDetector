@@ -1,7 +1,5 @@
 from keras.layers import Layer
 
-# from tensorflow import keras
-
 
 class L1Dist(Layer):
 
