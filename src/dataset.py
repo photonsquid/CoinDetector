@@ -52,96 +52,138 @@ def create_pairs(dataset):
 
     # then we will return a list of tuples (anchor_image, validation_image, computed_label)
 
-    # to be more efficient, we will create a dictionary with the following structure
+    # we will also, in the same time, create a list of all different countries, and a list of all different coin_values
+    # beacuse each country has the same number of coins, with the same values
 
-    # {
-    #   country: {
-    #       value: {
-    #           specificity: {
-    #               id: <image>
-    #           }
-    #       }
+    # howevever, each coin has a different number of specificities
+
+    # we will create the following lists
+
+    # countries = [country1, country2, country3, ...]
+    # coin_values = [value1, value2, value3, ...]
+
+    # we will create a dictionary of all the different specificities for each coin
+
+    # images = {
+    #       country_name: <string>,
+    #       coins: [
+    #          {
+    #               coin_value: <string>,
+    #               specificities: [
+    #                   {
+    #                       coin_specificity: <string>,
+    #                       images: [
+    #                           {
+    #                               image: <image>,
+    #                               id: <id>
+    #                           },
+    #                           ...
+    #                       ]
+    #                   },
+    #                   ...
+    #               ]
+    #           },
+    #           ...
+    #       ]
     #   }
-    # }
 
-    # this will allow us to quickly find a positive image
+    # firsr, iterate over the dataset and create the images dictionary, the countries and coin_values lists
 
-    # create the dictionary
-    images_dict = {}
+    images = {}
+    countries = []
+    coin_values = []
 
-    # loop through the dataset
     for image in dataset:
-        # get the country, value, specificity and id
+
+        # get the country, value, specificity and id of the image
         country = image["label"]["country"]
         value = image["label"]["value"]
         specificity = image["label"]["specificity"]
         id = image["label"]["id"]
 
-        # if the country is not in the dictionary, add it
-        if country not in images_dict:
-            images_dict[country] = {}
+        # if the country is not in the countries list, add it
+        if country not in countries:
+            countries.append(country)
 
-        # if the value is not in the dictionary, add it
-        if value not in images_dict[country]:
-            images_dict[country][value] = {}
+        # if the value is not in the coin_values list, add it
+        if value not in coin_values:
+            coin_values.append(value)
 
-        # if the specificity is not in the dictionary, add it
-        if specificity not in images_dict[country][value]:
-            images_dict[country][value][specificity] = {}
+        # if the country is not in the images dictionary, add it
+        if country not in images:
+            images[country] = {
+                "coins": []
+            }
 
-        # add the image to the dictionary
-        images_dict[country][value][specificity][id] = image
+        # if the value is not in the coins list, add it
+        if value not in images[country]["coins"]:
+            images[country]["coins"].append({
+                "value": value,
+                "specificities": []
+            })
 
-    # create the list of tuples
+        # if the specificity is not in the specificities list, add it
+        if specificity not in images[country]["coins"][value]["specificities"]:
+            images[country]["coins"][value]["specificities"].append({
+                "specificity": specificity,
+                "images": []
+            })
+
+        # add the image to the images dictionary
+        images[country]["coins"][value]["specificities"][specificity]["images"].append({
+            "image": image["image"],
+            "id": id
+        })
+
+    # now that we have the images dictionary, the countries and coin_values lists
+    # we can create the pairs
+
     images_pairs = []
 
-    # loop through the dataset
-    for image in dataset:
-        # get the country, value, specificity and id
-        country = image["label"]["country"]
-        value = image["label"]["value"]
-        specificity = image["label"]["specificity"]
-        id = image["label"]["id"]
+    for country in countries:
+        for coin_value in coin_values:
+            # get list of all specificities for the current coin
+            coin_specificities = images[country]["coins"][coin_value]["specificities"]
+            for coin_specificity in coin_specificities:
+                for image in images[country]["coins"][coin_value]["specificities"][coin_specificity]["images"]:
+                    # randmoly choose a positive or negative image
+                    positive = random.choice([True, False])
+                    validation_image = None
+                    computed_label = None
+                    if positive:
+                        computed_label = [1, 1, 1, 1, 1]
+                        # if positive, same country, same coin_value and same_specificity, but different id
+                        # we need to randomly choose a different id
+                        while True:
+                            # get a random image from the same country, same coin_value and same_specificity
+                            validation_image = random.choice(
+                                images[country]["coins"][coin_value]["specificities"][coin_specificity]["images"])
+                            # check if the id is different
+                            if validation_image["id"] != image["id"]:
+                                # if different, break the loop
+                                break
+                    else:
+                        # if negative, at least one different attribute (country, coin_value, coin_specificity)
+                        computed_label = [0, 0, 0, 0, 0]
 
-        # create the anchor image
-        anchor_image = image["image"]
+                        while True:
+                            # get a random country
+                            random_country = random.choice(countries)
+                            # get a random coin_value
+                            random_coin_value = random.choice(coin_values)
+                            # get a random coin_specificity
+                            random_coin_specificity = random.choice(
+                                coin_specificities)
+                            # get a random image
+                            validation_image = random.choice(
+                                images[random_country]["coins"][random_coin_value]["specificities"][random_coin_specificity]["images"])
+                            # check if the country is different
+                            if random_country != country or random_coin_value != coin_value or random_coin_specificity != coin_specificity:
+                                # if different, break the loop
+                                break
 
-        # randomly select a positive or negative image
-        if random.random() > 0.5:
-            # select a positive image
-            # this image will have the same country, value, specificity but different id
-            # get a random id
-            random_id = random.choice(
-                list(images_dict[country][value][specificity].keys())
-            )
-            # get the image
-            validation_image = images_dict[country][value][specificity][random_id]["image"]
-            # create the label
-            computed_label = np.array([1, 1, 1, 1, 1])
-        else:
-            # select a negative image
-            # get a random country
-            random_country = random.choice(list(images_dict.keys()))
-            # get a random value
-            random_value = random.choice(
-                list(images_dict[random_country].keys()))
-            # get a random specificity
-            random_specificity = random.choice(
-                list(images_dict[random_country][random_value].keys())
-            )
-            # get a random id
-            random_id = random.choice(
-                list(images_dict[random_country][random_value]
-                     [random_specificity].keys())
-            )
-            # get the image
-            validation_image = images_dict[random_country][random_value][
-                random_specificity
-            ][random_id]["image"]
-            # create the label
-            computed_label = np.array([0, 0, 0, 0, 0])
-
-        # add the tuple to the list
-        images_pairs.append((anchor_image, validation_image, computed_label))
+                    # add the pair to the images_pairs list
+                    images_pairs.append(
+                        (image["image"], validation_image["image"], positive))
 
     return images_pairs
