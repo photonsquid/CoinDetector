@@ -103,7 +103,7 @@ def create_pairs(dataset):
             })
 
         # if the specificity is not in the specificities list, add it
-        a = images[country]["coins"][value]["specificities"]
+        a = images[country]["coins"][value]
         if specificity not in images[country]["coins"][value]["specificities"]:
             images[country]["coins"][value]["specificities"].append({
                 "specificity": specificity,
