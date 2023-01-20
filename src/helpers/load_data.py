@@ -79,4 +79,4 @@ def load_data(path: str):
 
 
 if __name__ == "__main__":
-    load_data("data")
+    load_data("data/tests")
