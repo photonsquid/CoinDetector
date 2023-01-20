@@ -75,7 +75,7 @@ def load_data(path: str):
                 }
             })
 
-    pass
+    return dataset
 
 
 if __name__ == "__main__":
