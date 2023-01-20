@@ -118,7 +118,7 @@ def create_pairs(dataset):
                             # get a random image from the same country, same coin_value and same_specificity
                             validation_image_id = random.choice(list_of_images)
                             # check if the id is different
-                            if validation_image_id != image["id"]:
+                            if validation_image_id != image:
                                 # if different, break the loop
                                 break
                         validation_image = images[country][coin_value][coin_specificity][validation_image_id]
