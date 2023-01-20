@@ -35,6 +35,7 @@ def load_data(path: str):
     # }
 
     # get all folder names in the path
+
     folders = os.listdir(path)
 
     dataset = {}
