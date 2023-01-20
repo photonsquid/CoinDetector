@@ -88,11 +88,14 @@ def create_pairs(dataset):
             images[country][value] = {}
 
         if specificity not in images[country][value]:
-            images[country][value][specificity] = {}
+            images[country][value][specificity] = []
 
         # add the image to the images dictionary
-        images[country][value][specificity]["id"] = id
-        images[country][value][specificity]["image"] = image["image"]
+        images[country][value][specificity].append(
+            {
+                "image": image["image"],
+                "id": id
+            })
 
     # now that we have the images dictionary, the countries and coin_values lists
     # we can create the pairs
