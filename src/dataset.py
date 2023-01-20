@@ -1,6 +1,8 @@
 import os
 import random
 
+import numpy as np
+
 
 def create_pairs(dataset):
 
@@ -126,8 +128,8 @@ def create_pairs(dataset):
                     anchor_image = images[country][coin_value][coin_specificity][image]
 
                     # convert the images to numpy arrays
-                    anchor_image = anchor_image.numpy()
-                    validation_image = validation_image.numpy()
+                    anchor_image = np.array(anchor_image)
+                    validation_image = np.array(validation_image)
 
                     # add the pair to the images_pairs list
                     anchor_imgs.append(anchor_image)
