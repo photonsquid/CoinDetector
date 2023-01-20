@@ -166,7 +166,7 @@ if __name__ == "__main__":
         for image in images:
             val = image['objects']['value']
             if (val == '1 cen'):
-                print("coucou")
+                print(val)
         print(dataset['train'])
     # create the pairs
     images_pairs = create_pairs(dataset['train'])
