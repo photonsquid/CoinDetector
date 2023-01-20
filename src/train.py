@@ -4,7 +4,7 @@ from src.models import make_embedding, make_siamese_model
 
 
 @tf.function
-def train_step(batch):
+def train_step(batch, siamese_model, opt, binary_cross_loss):
 
     # Record all of our operations
     with tf.GradientTape() as tape:
