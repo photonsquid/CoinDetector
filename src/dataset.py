@@ -22,30 +22,38 @@ def preprocess(file_path):
 # we'll use the following function to create the pairs
 
 
-def create_pairs(x, y):
-    """Create positive and negative pairs from two arrays"""
-    # create an empty list for the pairs
-    pairs = []
-    # create an empty list for the labels
-    labels = []
-    # create a list of unique classes
-    classes = np.unique(y)
-    # loop over the classes
-    for c in classes:
-        # find the indices of the images with the current class
-        idx = np.where(y == c)[0]
-        # loop over the indices
-        for i in range(len(idx)):
-            # get the current index
-            z1, z2 = idx[i], idx[(i + 1) % len(idx)]
-            # add the pair to the list of pairs
-            pairs += [[x[z1], x[z2]]]
-            # add the label to the list of labels
-            inc = random.randrange(1, len(classes))
-            dn = (c + inc) % len(classes)
-            labels += [c == dn]
-    # convert the pairs and labels to numpy arrays
-    pairs = np.array(pairs)
-    labels = np.array(labels)
-    # return the pairs and labels
-    return pairs, labels
+def create_pairs(dataset):
+
+    # dataset is a list with the following structure
+
+    # dataset = [
+    #   {
+    #       image: <image>,
+    #       label:{
+    #           country: <country>,
+    #           value: <value>,
+    #           spceificity: <specificity>,
+    #           id: <id>,
+    #       }
+    #   },
+    #   ...
+    # ]
+
+    # for each image in the dataset we need to create a pair, a pair is a
+    # tuple of 2 images and one label (anchor_image, validation_image, computed_label)
+    # the anchor image is the image we are trying to validate
+    # the validation image is either a positive or negative image
+    # the computed_label = 0,0,0,0,0 (negative) or 1,1,1,1,1 (positive)
+
+    # a positive image is an image of the same country, same value, same specificity but different id
+    # a negative image is an image of at least one diffrent attribute (country, value, specificity)
+
+    # we need to randomly select a postive or negative image for each image in the dataset
+
+    # then we will return
+    # (anchor, positive, computed_label) or (anchor, negative, computed_label)
+    # with computed_label = 0,0,0,0,0 (negative) or 1,1,1,1,1 (positive)
+
+    #
+
+    return (anchor, validaion, label)
