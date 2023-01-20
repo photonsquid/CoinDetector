@@ -158,7 +158,8 @@ if __name__ == "__main__":
     testing = False
     if testing == True:
         # load the dataset
-        dataset = load_data('data/tests')
+        # dataset = load_data('data/tests')
+        pass
     else:
         from datasets.load import load_dataset
         dataset = load_dataset('photonsquid/coins-euro')
