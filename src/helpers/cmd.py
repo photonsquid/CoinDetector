@@ -3,7 +3,7 @@
 import subprocess
 
 
-def execute(command, show_output=False):
+def run(command, show_output=False):
     """Execute a shell command and return its output"""
     process = subprocess.Popen(
         command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
@@ -20,13 +20,13 @@ def execute(command, show_output=False):
 
 def git_update(branch: str = "main", force: bool = False, show_output: bool = False):
     """Update the git repository"""
-    execute('git fetch --all', show_output)
-    execute('git checkout {}'.format(branch), show_output)
+    run('git fetch --all', show_output)
+    run('git checkout {}'.format(branch), show_output)
     if force:
-        execute('git reset --hard', show_output)
-    execute('git pull', show_output)
+        run('git reset --hard', show_output)
+    run('git pull', show_output)
 
 
 def print_gpu_name():
     """Print the name of the GPU"""
-    return execute('nvidia-smi --query-gpu=name --format=csv,noheader')
+    return run('nvidia-smi --query-gpu=name --format=csv,noheader')
