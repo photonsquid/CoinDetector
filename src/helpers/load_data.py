@@ -68,7 +68,7 @@ def load_data(path: str):
             # add the image to the dataset
             dataset[folder].append({
                 "image": image,
-                "label": {
+                "objects": {
                     "country": country,
                     "value": value,
                     "specificity": specificity,
