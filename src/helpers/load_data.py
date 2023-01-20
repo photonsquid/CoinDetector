@@ -75,3 +75,7 @@ def load_data(path: str):
             })
 
     pass
+
+
+if __name__ == "__main__":
+    load_data("data")
