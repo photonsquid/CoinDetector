@@ -129,7 +129,7 @@ def create_pairs(dataset):
                     validation_imgs.append(validation_image)
                     labels.append(computed_label)
 
-    return images_pairs
+    return anchor_imgs, validation_imgs, labels
 
 
 if __name__ == "__main__":
