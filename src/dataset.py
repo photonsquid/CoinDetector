@@ -162,7 +162,11 @@ if __name__ == "__main__":
         from datasets.load import load_dataset
         dataset = load_dataset('photonsquid/coins-euro')
         # get all labels
-        labels = dataset['train'].features['objects'].feature
+        images = dataset['train']
+        for image in images:
+            val = image['objects']['value']
+            if (val == '1 cen'):
+                print("coucou")
         print(dataset['train'])
     # create the pairs
     images_pairs = create_pairs(dataset['train'])
