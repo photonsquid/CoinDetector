@@ -74,7 +74,7 @@ def create_pairs(dataset):
 
     anchor_imgs = []
     validation_imgs = []
-    labels = []
+    computed_labels = []
 
     for country in countries:
         for coin_value in coin_values:
@@ -127,9 +127,9 @@ def create_pairs(dataset):
                     # add the pair to the images_pairs list
                     anchor_image.append(anchor_image)
                     validation_imgs.append(validation_image)
-                    labels.append(computed_label)
+                    computed_labels.append(computed_label)
 
-    return anchor_imgs, validation_imgs, labels
+    return anchor_imgs, validation_imgs, computed_labels
 
 
 if __name__ == "__main__":
