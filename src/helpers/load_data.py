@@ -44,7 +44,8 @@ def load_data(path: str):
         dataset[folder] = []
 
         # get all file names in the folder
-        files = os.listdir(os.path.join(path, folder))
+        folder_path = os.path.join(path, folder)
+        files = os.listdir(folder_path)
 
         for file in files:
             # compute from the file name the country, value, specificity and id
