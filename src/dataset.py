@@ -184,6 +184,6 @@ def create_pairs(dataset):
 
                     # add the pair to the images_pairs list
                     images_pairs.append(
-                        (image["image"], validation_image["image"], positive))
+                        (image["image"], validation_image["image"], computed_label))
 
     return images_pairs
