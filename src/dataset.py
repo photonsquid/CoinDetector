@@ -45,20 +45,12 @@ def create_pairs(dataset):
     # we will create a dictionary of all the different specificities for each coin
 
     # images = {
-    #       country_name: <string>,
-    #       coins: [
-    #          {
-    #               coin_value: <string>,
-    #               specificities: [
+    #       <country_name>:[
+    #          <coin_value>:{
+    #               <specificitie_name>: [
     #                   {
-    #                       coin_specificity: <string>,
-    #                       images: [
-    #                           {
-    #                               image: <image>,
-    #                               id: <id>
-    #                           },
-    #                           ...
-    #                       ]
+    #                           image: <image>,
+    #                           id: <id>
     #                   },
     #                   ...
     #               ]
@@ -91,19 +83,14 @@ def create_pairs(dataset):
 
         # if the country is not in the images dictionary, add it
         if country not in images:
-            images[country] = {
-                "coins": []
-            }
+            images[country] = {}
 
         # if the value is not in the coins list, add it
-        if value not in images[country]["coins"]:
-            images[country]["coins"].append({
-                "value": value,
-                "specificities": []
-            })
+        if value not in images[country][value]:
+            images[country][value] = {}
 
         # if the specificity is not in the specificities list, add it
-        a = images[country]["coins"][value]
+        a = images[country][value]
         if specificity not in images[country]["coins"][value]["specificities"]:
             images[country]["coins"][value]["specificities"].append({
                 "specificity": specificity,
