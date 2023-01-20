@@ -177,4 +177,4 @@ if __name__ == "__main__":
     # load the dataset
     dataset = load_data('data/tests')
     # create the pairs
-    # images_pairs = create_pairs(dataset)
+    images_pairs = create_pairs(dataset)
