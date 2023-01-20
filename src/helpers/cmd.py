@@ -20,3 +20,8 @@ def git_update(branch: str = "main", force: bool = False, show_output: bool = Fa
     if force:
         execute('git reset --hard', show_output)
     execute('git pull', show_output)
+
+
+def print_gpu_name():
+    """Print the name of the GPU"""
+    execute('nvidia-smi --query-gpu=name --format=csv,noheader', True)
