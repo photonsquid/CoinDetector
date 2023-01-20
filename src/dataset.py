@@ -92,7 +92,7 @@ def create_pairs(dataset):
 
         # add the image to the images dictionary
         images[country][value][specificity]["id"] = id
-        images[country][value][specificity)["image"] = image["image"]
+        images[country][value][specificity]["image"] = image["image"]
 
     # now that we have the images dictionary, the countries and coin_values lists
     # we can create the pairs
