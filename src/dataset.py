@@ -141,10 +141,10 @@ def create_pairs(dataset):
                                 # if different, break the loop
                                 break
                         validation_image = images[random_country][random_coin_value][random_coin_specificity][validation_image_id]
-
+                    anchor_image = images[country][coin_value][coin_specificity][image]
                     # add the pair to the images_pairs list
                     images_pairs.append(
-                        (image["image"], validation_image, computed_label))
+                        (anchor_image, validation_image, computed_label))
 
     return images_pairs
 
