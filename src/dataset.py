@@ -105,7 +105,8 @@ def create_pairs(dataset):
             for coin_specificity in coin_specificities:
                 for image in images[country][coin_value][coin_specificity]:
                     # randmoly choose a positive or negative image
-                    list_of_images = images[country][coin_value][coin_specificity]
+                    list_of_images = list(
+                        images[country][coin_value][coin_specificity])
                     positive = random.choice([True, False])
                     validation_image = None
                     computed_label = None
