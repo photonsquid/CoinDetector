@@ -1,7 +1,6 @@
 import tensorflow as tf
-from keras.layers import Conv2D, Dense, Flatten, Input, Layer, MaxPooling2D
-from keras.models import Model, Sequential, load_model
-from tensorflow import keras
+
+from src.models import make_embedding, make_siamese_model
 
 
 @tf.function
