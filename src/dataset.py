@@ -116,11 +116,12 @@ def create_pairs(dataset):
                         # we need to randomly choose a different id
                         while True:
                             # get a random image from the same country, same coin_value and same_specificity
-                            validation_image = random.choice(list_of_images)
+                            validation_image_id = random.choice(list_of_images)
                             # check if the id is different
-                            if validation_image["id"] != image["id"]:
+                            if validation_image_id != image["id"]:
                                 # if different, break the loop
                                 break
+                        validation_image = images[country][coin_value][coin_specificity][validation_image_id]
                     else:
                         # if negative, at least one different attribute (country, coin_value, coin_specificity)
                         computed_label = [0, 0, 0, 0, 0]
@@ -134,11 +135,12 @@ def create_pairs(dataset):
                             random_coin_specificity = random.choice(
                                 coin_specificities)
                             # get a random image
-                            validation_image = random.choice(list_of_images)
+                            validation_image_id = random.choice(list_of_images)
                             # check if the country is different
                             if random_country != country or random_coin_value != coin_value or random_coin_specificity != coin_specificity:
                                 # if different, break the loop
                                 break
+                        validation_image = images[random_country][random_coin_value][random_coin_specificity][validation_image_id]
 
                     # add the pair to the images_pairs list
                     images_pairs.append(
