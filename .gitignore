@@ -5,3 +5,7 @@ data/*
 
 # Virtualenv
 venv/
+
+# all pycache folders (nested or not)
+__pycache__/
+
