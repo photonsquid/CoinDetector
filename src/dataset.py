@@ -132,8 +132,8 @@ def create_pairs(dataset):
                             # get a random coin_value
                             random_coin_value = random.choice(coin_values)
                             # get a random coin_specificity
-                            random_coin_specificity = random.choice(
-                                coin_specificities)
+                            random_coin_specificity = random.choice(list(
+                                coin_specificities))
                             # get a random image
                             validation_image_id = random.choice(list_of_images)
                             # check if the country is different
