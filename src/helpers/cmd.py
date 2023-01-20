@@ -29,4 +29,4 @@ def git_update(branch: str = "main", force: bool = False, show_output: bool = Fa
 
 def print_gpu_name():
     """Print the name of the GPU"""
-    return execute('nvidia-smi --query-gpu=name --format=csv,noheader').decode('utf-8')
+    return execute('nvidia-smi --query-gpu=name --format=csv,noheader')
