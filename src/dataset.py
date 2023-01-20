@@ -1,26 +1,5 @@
 import random
 
-import numpy as np
-import tensorflow as tf
-
-
-def preprocess(file_path):
-
-    # Read in image from file path
-    byte_img = tf.io.read_file(file_path)
-    # Load in the image
-    img = tf.io.decode_jpeg(byte_img)
-
-    # Preprocessing steps - resizing the image to be 100x100x3
-    img = tf.image.resize(img, (100, 100))
-    # Scale image to be between 0 and 1
-    img = img / 255.0  # type: ignore
-
-    # Return image
-    return img
-
-# we'll use the following function to create the pairs
-
 
 def create_pairs(dataset):
 
@@ -189,7 +168,7 @@ def create_pairs(dataset):
     return images_pairs
 
 
-if __main__ == "__name__":
+if __name__ == "__main__":
     from helpers.load_data import load_data
 
     # load the dataset
