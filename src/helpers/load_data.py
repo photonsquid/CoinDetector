@@ -74,6 +74,7 @@ def load_data(path: str):
                     "id": id
                 }
             })
+    print("coucou")
 
     return dataset
 
