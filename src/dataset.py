@@ -166,4 +166,3 @@ if __name__ == "__main__":
         dataset = load_dataset('photonsquid/coins-euro')
     # create the pairs
     images_pairs = create_pairs(dataset['train'])
-    print(images_pairs)
