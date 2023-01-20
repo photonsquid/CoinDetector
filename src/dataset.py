@@ -135,6 +135,10 @@ def create_pairs(dataset, size=(105, 105)):
                     anchor_image = np.array(anchor_image)
                     validation_image = np.array(validation_image)
 
+                    # scale down the images
+                    anchor_image = anchor_image / 255
+                    validation_image = validation_image / 255
+
                     # add the pair to the images_pairs list
                     anchor_imgs.append(anchor_image)
                     validation_imgs.append(validation_image)
