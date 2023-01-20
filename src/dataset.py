@@ -124,6 +124,11 @@ def create_pairs(dataset):
                                 break
                         validation_image = images[random_country][random_coin_value][random_coin_specificity][validation_image_id]
                     anchor_image = images[country][coin_value][coin_specificity][image]
+
+                    # convert the images to numpy arrays
+                    anchor_image = anchor_image.numpy()
+                    validation_image = validation_image.numpy()
+
                     # add the pair to the images_pairs list
                     anchor_imgs.append(anchor_image)
                     validation_imgs.append(validation_image)
