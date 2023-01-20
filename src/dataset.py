@@ -170,11 +170,11 @@ def create_pairs(dataset):
 
 
 if __name__ == "__main__":
-    from src.helpers.load_data import load_data
+    from helpers.load_data import load_data
 
     # pwd
     print(os.getcwd())
     # load the dataset
-    # dataset = load_data('../data/tests')
+    dataset = load_data('data/tests')
     # create the pairs
     # images_pairs = create_pairs(dataset)
