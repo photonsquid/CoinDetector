@@ -85,10 +85,12 @@ def create_pairs(dataset):
 
         # check if value is an attribute of the images[country] dictionary
         if value not in images[country]:
-            images[country][value] = {}
+            images[country][value] = []
 
         if specificity not in images[country][value]:
-            images[country][value][specificity] = []
+            images[country][value].append({
+                specificity: []
+            })
 
         # add the image to the images dictionary
         images[country][value][specificity].append(
