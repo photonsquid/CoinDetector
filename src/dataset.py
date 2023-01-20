@@ -88,10 +88,7 @@ def create_pairs(dataset):
             images[country][value] = {}
 
         if specificity not in images[country][value]:
-            images[country][value][specificity] = {
-                "images": None,
-                "id" = None
-            }
+            images[country][value][specificity] = {}
 
         # add the image to the images dictionary
         images[country][value][specificity]["id"] = id
