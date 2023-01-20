@@ -45,12 +45,12 @@ def create_pairs(dataset):
     # we will create a dictionary of all the different specificities for each coin
 
     # images = {
-    #       <country_name>:[
+    #       <country_name>:{
     #          <coin_value>:{
-    #               <specificitie_name>: [
+    #               <edition_name>: [
     #                   {
     #                           image: <image>,
-    #                           id: <id>
+    #                           variant: <id>
     #                   },
     #                   ...
     #               ]
@@ -71,7 +71,7 @@ def create_pairs(dataset):
         country = image["objects"]["country"]
         value = image["objects"]["value"]
         specificity = image["objects"]["edition"]
-        id = image["objects"]["id"]
+        id = image["objects"]["variant"]
 
         # if the country is not in the countries list, add it
         if country not in countries:
