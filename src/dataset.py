@@ -85,8 +85,8 @@ def create_pairs(dataset):
         if country not in images:
             images[country] = {}
 
-        # if the value is not in the coins list, add it
-        if value not in images[country][value]:
+        # check if value is an attribute of the images[country] dictionary
+        if value not in images[country]:
             images[country][value] = {}
 
         # if the specificity is not in the specificities list, add it
