@@ -15,8 +15,8 @@ def execute(command, show_output=False):
 
 def git_update(branch: str = "main", force: bool = False, show_output: bool = False):
     """Update the git repository"""
-    execute('git fetch --all')
-    execute('git checkout {}'.format(branch))
+    execute('git fetch --all', show_output)
+    execute('git checkout {}'.format(branch), show_output)
     if force:
-        execute('git reset --hard')
-    execute('git pull')
+        execute('git reset --hard', show_output)
+    execute('git pull', show_output)
