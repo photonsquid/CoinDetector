@@ -78,7 +78,6 @@ def create_pairs(dataset):
             countries.append(country)
 
         if value not in coin_values:
-            print(value)
             coin_values.append(value)
 
         if country not in images:
