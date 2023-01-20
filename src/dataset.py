@@ -4,7 +4,7 @@ import random
 
 def create_pairs(dataset):
 
-    # dataset is a list with the following structure
+    # input
 
     # dataset = [
     #   {
@@ -19,31 +19,7 @@ def create_pairs(dataset):
     #   ...
     # ]
 
-    # for each image in the dataset we need to create a pair, a pair is a
-    # tuple of 2 images and one label (anchor_image, validation_image, computed_label)
-    # the anchor image is the image we are trying to validate
-    # the validation image is either a positive or negative image
-    # the computed_label = 0,0,0,0,0 (negative) or 1,1,1,1,1 (positive)
-
-    # a positive image is an image of the same country, same value, same specificity but different id
-    # a negative image is an image of at least one diffrent attribute (country, value, specificity)
-
-    # we need to randomly select a postive or negative image for each image in the dataset
-
-    # then we will return a list of tuples (anchor_image, validation_image, computed_label)
-
-    # we will also, in the same time, create a list of all different countries, and a list of all different coin_values
-    # beacuse each country has the same number of coins, with the same values
-
-    # howevever, each coin has a different number of specificities
-
-    # we will create the following lists
-
-    # countries = [country1, country2, country3, ...]
-    # coin_values = [value1, value2, value3, ...]
-
-    # we will create a dictionary of all the different specificities for each coin
-
+    # output
     # images = {
     #       <country_name>:{
     #          <coin_value>:{
