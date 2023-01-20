@@ -1,4 +1,5 @@
-from tensorflow.keras.layers import Layer
+from tensorflow import keras
+from keras.layers
 
 
 class L1Dist(Layer):
