@@ -1,4 +1,7 @@
 from tensorflow.keras.metrics import Precision, Recall
+from tensorflow.keras.losses import BinaryCrossentropy
+from tensorflow.keras.optimizers import Adam
+from tensorflow
 
 
 @tf.function
