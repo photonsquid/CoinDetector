@@ -65,7 +65,10 @@ def load_data(path: str):
             # load the image from the file
             image = cv2.imread(os.path.join(path, folder, file))
             # convert into bytes
-            image = image.tobytes()
+            image = {
+                "bytes": image.tobytes(),
+                "path": file
+            }
 
             # add the image to the dataset
             dataset[folder].append({
