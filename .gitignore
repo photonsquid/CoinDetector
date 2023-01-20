@@ -1,5 +1,11 @@
-# do not sync the data directory, as it contains all images of coins (big dataset)
-data
+# ignore all folders in data/ except for data/tests
+data/*
+!data/tests
+
 
 # Virtualenv
 venv/
+
+# all pycache folders (nested or not)
+__pycache__/
+
