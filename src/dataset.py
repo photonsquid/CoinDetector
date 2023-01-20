@@ -1,3 +1,7 @@
+import numpy as np
+import tensorflow as tf
+
+
 def preprocess(file_path):
 
     # Read in image from file path
