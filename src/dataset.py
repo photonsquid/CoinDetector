@@ -109,6 +109,7 @@ def create_pairs(dataset):
             for coin_specificity in coin_specificities:
                 for image in images[country][coin_value][coin_specificity]:
                     # randmoly choose a positive or negative image
+                    list_of_images = images[country][coin_value][coin_specificity]
                     positive = random.choice([True, False])
                     validation_image = None
                     computed_label = None
@@ -118,7 +119,6 @@ def create_pairs(dataset):
                         # we need to randomly choose a different id
                         while True:
                             # get a random image from the same country, same coin_value and same_specificity
-                            list_of_images = images[country][coin_value][coin_specificity]
                             validation_image = random.choice(list_of_images)
                             # check if the id is different
                             if validation_image["id"] != image["id"]:
@@ -137,8 +137,7 @@ def create_pairs(dataset):
                             random_coin_specificity = random.choice(
                                 coin_specificities)
                             # get a random image
-                            validation_image = random.choice(
-                                images[random_country][random_coin_value][random_coin_specificity])
+                            validation_image = random.choice(list_of_images)
                             # check if the country is different
                             if random_country != country or random_coin_value != coin_value or random_coin_specificity != coin_specificity:
                                 # if different, break the loop
