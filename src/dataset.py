@@ -68,10 +68,10 @@ def create_pairs(dataset):
     for image in dataset:
 
         # get the country, value, specificity and id of the image
-        country = image["objects"]["country"]
-        value = image["objects"]["value"]
-        specificity = image["objects"]["edition"]
-        id = image["objects"]["variant"]
+        country = image["labels"]["country"]
+        value = image["labels"]["value"]
+        specificity = image["labels"]["edition"]
+        id = image["labels"]["variant"]
 
         # if the country is not in the countries list, add it
         if country not in countries:
