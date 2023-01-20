@@ -125,7 +125,7 @@ def create_pairs(dataset):
                         validation_image = images[random_country][random_coin_value][random_coin_specificity][validation_image_id]
                     anchor_image = images[country][coin_value][coin_specificity][image]
                     # add the pair to the images_pairs list
-                    anchor_image.append(anchor_image)
+                    anchor_imgs.append(anchor_image)
                     validation_imgs.append(validation_image)
                     computed_labels.append(computed_label)
 
@@ -143,4 +143,5 @@ if __name__ == "__main__":
         from datasets.load import load_dataset
         dataset = load_dataset('photonsquid/coins-euro')
     # create the pairs
-    images_pairs = create_pairs(dataset['train'])
+    anchor_imgs, validation_imgs, computed_labels = create_pairs(
+        dataset['train'])
