@@ -127,6 +127,9 @@ def create_pairs(dataset, size=(105, 105)):
                         validation_image = images[random_country][random_coin_value][random_coin_specificity][validation_image_id]
                     anchor_image = images[country][coin_value][coin_specificity][image]
 
+                    # remove the alpha channel
+                    anchor_image = anchor_image.convert("RGB")
+
                     # resize the images
                     anchor_image = anchor_image.resize(size)
                     validation_image = validation_image.resize(size)
