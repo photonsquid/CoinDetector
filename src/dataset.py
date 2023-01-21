@@ -3,6 +3,11 @@ import random
 
 import numpy as np
 
+import numpy as np
+
+
+def create_pairs(dataset, size=(105, 105)):
+
 
 def create_pairs(dataset, size=(105, 105)):
 
@@ -77,6 +82,9 @@ def create_pairs(dataset, size=(105, 105)):
     anchor_imgs = []
     validation_imgs = []
     computed_labels = []
+    anchor_imgs = []
+    validation_imgs = []
+    computed_labels = []
 
     for country in countries:
         for coin_value in coin_values:
@@ -147,7 +155,11 @@ def create_pairs(dataset, size=(105, 105)):
                     anchor_imgs.append(anchor_image)
                     validation_imgs.append(validation_image)
                     computed_labels.append(computed_label)
+                    anchor_imgs.append(anchor_image)
+                    validation_imgs.append(validation_image)
+                    computed_labels.append(computed_label)
 
+    return anchor_imgs, validation_imgs, computed_labels
     return anchor_imgs, validation_imgs, computed_labels
 
 
@@ -162,5 +174,7 @@ if __name__ == "__main__":
         from datasets.load import load_dataset
         dataset = load_dataset('photonsquid/coins-euro')
     # create the pairs
+    anchor_imgs, validation_imgs, computed_labels = create_pairs(
+        dataset['train'])
     anchor_imgs, validation_imgs, computed_labels = create_pairs(
         dataset['train'])
