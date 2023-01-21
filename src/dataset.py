@@ -88,8 +88,7 @@ def create_pairs(dataset, size=(105, 105)):
             for coin_specificity in coin_specificities:
                 for image in images[country][coin_value][coin_specificity]:
                     # randmoly choose a positive or negative image
-                    list_of_images = list(
-                        images[country][coin_value][coin_specificity])
+                    list_of_images = list(image)
                     positive = random.choice([True, False])
                     validation_image = None
                     computed_label = None
@@ -97,14 +96,18 @@ def create_pairs(dataset, size=(105, 105)):
                         computed_label = 1
                         # if positive, same country, same coin_value and same_specificity, but different id
                         # we need to randomly choose a different id
-                        while True:
-                            # get a random image from the same country, same coin_value and same_specificity
-                            validation_image_id = random.choice(list_of_images)
-                            # check if the id is different
-                            if validation_image_id != image:
-                                # if different, break the loop
-                                break
-                        validation_image = images[country][coin_value][coin_specificity][validation_image_id]
+                        if len(list_of_images) == 1:
+                            validation_image = image
+                        else:
+                            while True:
+                                # get a random image from the same country, same coin_value and same_specificity
+                                validation_image_id = random.choice(
+                                    list_of_images)
+                                # check if the id is different
+                                if validation_image_id != image:
+                                    # if different, break the loop
+                                    break
+                            validation_image = images[country][coin_value][coin_specificity][validation_image_id]
                     else:
                         # if negative, at least one different attribute (country, coin_value, coin_specificity)
                         computed_label = 0
