@@ -1,8 +1,10 @@
 import os
 import random
 
+import numpy as np
 
-def create_pairs(dataset):
+
+def create_pairs(dataset, size=(105, 105)):
 
     # input
 
@@ -72,7 +74,9 @@ def create_pairs(dataset):
     # now that we have the images dictionary, the countries and coin_values lists
     # we can create the pairs
 
-    images_pairs = []
+    anchor_imgs = []
+    validation_imgs = []
+    computed_labels = []
 
     for country in countries:
         for coin_value in coin_values:
@@ -122,11 +126,25 @@ def create_pairs(dataset):
                                 break
                         validation_image = images[random_country][random_coin_value][random_coin_specificity][validation_image_id]
                     anchor_image = images[country][coin_value][coin_specificity][image]
-                    # add the pair to the images_pairs list
-                    images_pairs.append(
-                        (anchor_image, validation_image, computed_label))
 
-    return images_pairs
+                    # resize the images
+                    anchor_image = anchor_image.resize(size)
+                    validation_image = validation_image.resize(size)
+
+                    # convert the images to numpy arrays
+                    anchor_image = np.array(anchor_image)
+                    validation_image = np.array(validation_image)
+
+                    # scale down the images
+                    anchor_image = anchor_image / 255
+                    validation_image = validation_image / 255
+
+                    # add the pair to the images_pairs list
+                    anchor_imgs.append(anchor_image)
+                    validation_imgs.append(validation_image)
+                    computed_labels.append(computed_label)
+
+    return anchor_imgs, validation_imgs, computed_labels
 
 
 if __name__ == "__main__":
@@ -140,4 +158,5 @@ if __name__ == "__main__":
         from datasets.load import load_dataset
         dataset = load_dataset('photonsquid/coins-euro')
     # create the pairs
-    images_pairs = create_pairs(dataset['train'])
+    anchor_imgs, validation_imgs, computed_labels = create_pairs(
+        dataset['train'])
