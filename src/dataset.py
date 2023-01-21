@@ -129,6 +129,7 @@ def create_pairs(dataset, size=(105, 105)):
 
                     # remove the alpha channel
                     anchor_image = anchor_image.convert("RGB")
+                    validation_image = validation_image.convert("RGB")
 
                     # resize the images
                     anchor_image = anchor_image.resize(size)
