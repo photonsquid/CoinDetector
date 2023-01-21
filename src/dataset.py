@@ -91,7 +91,7 @@ def create_pairs(dataset, size=(105, 105)):
                     validation_image = None
                     computed_label = None
                     if positive:
-                        computed_label = [1, 1, 1, 1, 1]
+                        computed_label = 1
                         # if positive, same country, same coin_value and same_specificity, but different id
                         # we need to randomly choose a different id
                         while True:
@@ -104,7 +104,7 @@ def create_pairs(dataset, size=(105, 105)):
                         validation_image = images[country][coin_value][coin_specificity][validation_image_id]
                     else:
                         # if negative, at least one different attribute (country, coin_value, coin_specificity)
-                        computed_label = [0, 0, 0, 0, 0]
+                        computed_label = 0
 
                         while True:
                             # get a random country
