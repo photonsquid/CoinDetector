@@ -155,7 +155,6 @@ def create_pairs(dataset, size=(105, 105)):
                     computed_labels.append(computed_label)
 
     return anchor_imgs, validation_imgs, computed_labels
-    return anchor_imgs, validation_imgs, computed_labels
 
 
 if __name__ == "__main__":
