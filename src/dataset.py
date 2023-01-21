@@ -3,6 +3,11 @@ import random
 
 import numpy as np
 
+import numpy as np
+
+
+def create_pairs(dataset, size=(105, 105)):
+
 
 def create_pairs(dataset, size=(105, 105)):
 
@@ -77,6 +82,9 @@ def create_pairs(dataset, size=(105, 105)):
     anchor_imgs = []
     validation_imgs = []
     computed_labels = []
+    anchor_imgs = []
+    validation_imgs = []
+    computed_labels = []
 
     for country in countries:
         for coin_value in coin_values:
@@ -91,7 +99,7 @@ def create_pairs(dataset, size=(105, 105)):
                     validation_image = None
                     computed_label = None
                     if positive:
-                        computed_label = [1, 1, 1, 1, 1]
+                        computed_label = 1
                         # if positive, same country, same coin_value and same_specificity, but different id
                         # we need to randomly choose a different id
                         while True:
@@ -104,7 +112,7 @@ def create_pairs(dataset, size=(105, 105)):
                         validation_image = images[country][coin_value][coin_specificity][validation_image_id]
                     else:
                         # if negative, at least one different attribute (country, coin_value, coin_specificity)
-                        computed_label = [0, 0, 0, 0, 0]
+                        computed_label = 0
 
                         while True:
                             # get a random country
@@ -127,6 +135,10 @@ def create_pairs(dataset, size=(105, 105)):
                         validation_image = images[random_country][random_coin_value][random_coin_specificity][validation_image_id]
                     anchor_image = images[country][coin_value][coin_specificity][image]
 
+                    # remove the alpha channel
+                    anchor_image = anchor_image.convert("RGB")
+                    validation_image = validation_image.convert("RGB")
+
                     # resize the images
                     anchor_image = anchor_image.resize(size)
                     validation_image = validation_image.resize(size)
@@ -143,7 +155,11 @@ def create_pairs(dataset, size=(105, 105)):
                     anchor_imgs.append(anchor_image)
                     validation_imgs.append(validation_image)
                     computed_labels.append(computed_label)
+                    anchor_imgs.append(anchor_image)
+                    validation_imgs.append(validation_image)
+                    computed_labels.append(computed_label)
 
+    return anchor_imgs, validation_imgs, computed_labels
     return anchor_imgs, validation_imgs, computed_labels
 
 
@@ -158,5 +174,7 @@ if __name__ == "__main__":
         from datasets.load import load_dataset
         dataset = load_dataset('photonsquid/coins-euro')
     # create the pairs
+    anchor_imgs, validation_imgs, computed_labels = create_pairs(
+        dataset['train'])
     anchor_imgs, validation_imgs, computed_labels = create_pairs(
         dataset['train'])
