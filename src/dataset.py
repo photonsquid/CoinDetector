@@ -86,7 +86,7 @@ def create_pairs(dataset, size=(105, 105)):
             # get list of all specificities for the current coin
             coin_specificities = images[country][coin_value]
             for coin_specificity in coin_specificities:
-                for image in images[country][coin_value][coin_specificity]:
+                for image_id in images[country][coin_value][coin_specificity]:
                     # randmoly choose a positive or negative image
                     list_of_images = list(
                         images[country][coin_value][coin_specificity])
@@ -98,14 +98,14 @@ def create_pairs(dataset, size=(105, 105)):
                         # if positive, same country, same coin_value and same_specificity, but different id
                         # we need to randomly choose a different id
                         if len(list_of_images) == 1:
-                            validation_image = images[country][coin_value][coin_specificity][image]
+                            validation_image = images[country][coin_value][coin_specificity][image_id]
                         else:
                             while True:
                                 # get a random image from the same country, same coin_value and same_specificity
                                 validation_image_id = random.choice(
                                     list_of_images)
                                 # check if the id is different
-                                if validation_image_id != image:
+                                if validation_image_id != image_id:
                                     # if different, break the loop
                                     break
                             validation_image = images[country][coin_value][coin_specificity][validation_image_id]
@@ -131,7 +131,7 @@ def create_pairs(dataset, size=(105, 105)):
                                 # if different, break the loop
                                 break
                         validation_image = images[random_country][random_coin_value][random_coin_specificity][validation_image_id]
-                    anchor_image = images[country][coin_value][coin_specificity][image]
+                    anchor_image = images[country][coin_value][coin_specificity][image_id]
 
                     # remove the alpha channel
                     anchor_image = anchor_image.convert("RGB")
