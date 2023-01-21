@@ -170,6 +170,4 @@ if __name__ == "__main__":
         dataset = load_dataset('photonsquid/coins-euro')
     # create the pairs
     anchor_imgs, validation_imgs, computed_labels = create_pairs(
-        dataset['train'])
-    anchor_imgs, validation_imgs, computed_labels = create_pairs(
-        dataset['train'])
+        dataset['test'])
