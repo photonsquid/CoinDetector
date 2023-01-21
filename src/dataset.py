@@ -3,11 +3,6 @@ import random
 
 import numpy as np
 
-import numpy as np
-
-
-def create_pairs(dataset, size=(105, 105)):
-
 
 def create_pairs(dataset, size=(105, 105)):
 
