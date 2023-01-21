@@ -3,11 +3,6 @@ import random
 
 import numpy as np
 
-import numpy as np
-
-
-def create_pairs(dataset, size=(105, 105)):
-
 
 def create_pairs(dataset, size=(105, 105)):
 
@@ -91,7 +86,7 @@ def create_pairs(dataset, size=(105, 105)):
             # get list of all specificities for the current coin
             coin_specificities = images[country][coin_value]
             for coin_specificity in coin_specificities:
-                for image in images[country][coin_value][coin_specificity]:
+                for image_id in images[country][coin_value][coin_specificity]:
                     # randmoly choose a positive or negative image
                     list_of_images = list(
                         images[country][coin_value][coin_specificity])
@@ -102,14 +97,18 @@ def create_pairs(dataset, size=(105, 105)):
                         computed_label = 1
                         # if positive, same country, same coin_value and same_specificity, but different id
                         # we need to randomly choose a different id
-                        while True:
-                            # get a random image from the same country, same coin_value and same_specificity
-                            validation_image_id = random.choice(list_of_images)
-                            # check if the id is different
-                            if validation_image_id != image:
-                                # if different, break the loop
-                                break
-                        validation_image = images[country][coin_value][coin_specificity][validation_image_id]
+                        if len(list_of_images) == 1:
+                            validation_image = images[country][coin_value][coin_specificity][image_id]
+                        else:
+                            while True:
+                                # get a random image from the same country, same coin_value and same_specificity
+                                validation_image_id = random.choice(
+                                    list_of_images)
+                                # check if the id is different
+                                if validation_image_id != image_id:
+                                    # if different, break the loop
+                                    break
+                            validation_image = images[country][coin_value][coin_specificity][validation_image_id]
                     else:
                         # if negative, at least one different attribute (country, coin_value, coin_specificity)
                         computed_label = 0
@@ -119,7 +118,6 @@ def create_pairs(dataset, size=(105, 105)):
                             random_country = random.choice(countries)
                             # get a random coin_value
                             random_coin_value = random.choice(coin_values)
-                            coin_valuess = list(images[random_country])
                             # get a random coin_specificity of the random coin_value of the random country
                             random_coin_specificity = random.choice(
                                 list(images[random_country][random_coin_value]))
@@ -133,7 +131,7 @@ def create_pairs(dataset, size=(105, 105)):
                                 # if different, break the loop
                                 break
                         validation_image = images[random_country][random_coin_value][random_coin_specificity][validation_image_id]
-                    anchor_image = images[country][coin_value][coin_specificity][image]
+                    anchor_image = images[country][coin_value][coin_specificity][image_id]
 
                     # remove the alpha channel
                     anchor_image = anchor_image.convert("RGB")
@@ -160,7 +158,6 @@ def create_pairs(dataset, size=(105, 105)):
                     computed_labels.append(computed_label)
 
     return anchor_imgs, validation_imgs, computed_labels
-    return anchor_imgs, validation_imgs, computed_labels
 
 
 if __name__ == "__main__":
@@ -175,6 +172,4 @@ if __name__ == "__main__":
         dataset = load_dataset('photonsquid/coins-euro')
     # create the pairs
     anchor_imgs, validation_imgs, computed_labels = create_pairs(
-        dataset['train'])
-    anchor_imgs, validation_imgs, computed_labels = create_pairs(
-        dataset['train'])
+        dataset['test'])
