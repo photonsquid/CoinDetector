@@ -18,14 +18,20 @@ The main struggle that this project came with, was the absolute lack of usable p
 - Finally, the process of capturing well-lit and high-quality images of coins demanded **considerable time and effort**, requiring the use of some sort of automated contraption, which we lacked the time or the money to build.
 
 After careful consideration of the pros and cons of each alternative which came to mind, it was deemed best to generate images using a **rendering software** such as Blender. We scrapped hundreds of coins from the internet (more specifically from the European Central bank's website), cut out the excess background, and programatically generated textures for our coin 3d models using **Hough circle detection** to crop the images to the correct shape.
-|![[at_2euro.jpg]] | ![[at_2euro.texture.png]] |
-|--|--|
-|*Fig. 1: Original image scrapped from the ECB website*|*Fig. 2: Programmatically generated cylinder texture*|
 
-A blender scene consisting of a high resolution cylinder (representing the coin) and a rectangular parallelepiped (which acts as the ground/table upon which the coin lies) will be used to generate the different shots.
-| ![[scene_wireframe.png]]| ![[scene_rendered.png]]|
-|--|--|
-|*Fig. 3: Wireframe view of the scene* |*Fig. 4: Rendered view of the scene* |
+![[at_2euro.jpg|340]] 
+*Fig. 1: Original image scrapped from the ECB website* 
+
+![[at_2euro.texture.png]]
+*Fig. 2: Programmatically generated cylinder texture*
+
+A blender scene consisting of a high resolution cylinder (representing the coin) and a rectangular parallelepiped (which acts as the ground/table upon which the coin lies) will be used to generate the different shots. 
+
+![[scene_wireframe.png]]
+*Fig. 3: Wireframe view of the scene*
+
+![[scene_rendered.png]]
+*Fig. 4: Rendered view of the scene* 
 
 The rendering process is fully automated using a python script, which single-handedly randomizes the camera position (whose frustum is visible in *Fig. 3* & *Fig. 4*), the lighting, the concrete texture in the background, and the amount of rust on the surface of the coin, using shaders. This process of randomization and rendering is executed $X$ amount of times for each coin, where $X$ is a predefined constant, which enables the generation of a nearly infinite amount of images from just a couple of pictures downloaded from the Internet.
 
@@ -46,8 +52,6 @@ bpy.ops.render.render(write_still=True)
 ```
 
 ## Theoretical background
-
-> *Literature overview: which models from the literature are suitable for this problem given your data and why? which algorithms can be used to train them? how these models are related to your hypothesis? present an overview of your approach: what steps are executed in the learning pipeline? which hyperparameters of the learning algorithm are available and how they can influence the results? You must show that you applied methods considered during the semester to the selected problem. Feel free to include any figures or tables helping to describe your method and compare it with others. If you use information from other sources, please cite it properly.*
 
 Coin recognition is a challenging problem in computer vision due to the complexity and variability of coins. Coins come in different sizes, shapes, and colors, and can exhibit a wide range of visual characteristics such as scratches, dents, and dirt. Therefore, developing an efficient and reliable system for coin recognition requires the use of advanced algorithms and techniques in computer vision.
 
@@ -94,6 +98,14 @@ Overall, the use of a siamese or triplet architecture for coin recognition has t
 ## Implementation
 
 > *How did you implement your approach? which tools were used? show interesting snippets or present your algorithms*
+
+In this approach, the loss function for the triplet training structure is as follows:
+$$
+\begin{equation} L(a,p,n) = \max(0, d(a,p) - d(a,n) + \alpha) \end{equation}
+$$
+
+where $a$ is the anchor input, $p$ is the positive input, $n$ is the negative input, $d$ is a distance function (such as Euclidean distance), and $\alpha$ is a margin parameter
+
 
 ## Evaluation
 

@@ -45,3 +45,28 @@ def make_siamese_model(embedding):
     classifier = Dense(1, activation='sigmoid')(distances)
 
     return Model(inputs=[input_image, validation_image], outputs=classifier, name='SiameseNetwork')
+
+
+def make_triplet_model(embedding):
+
+    # Anchor image input in the network
+    input_image = Input(name='input_img', shape=(105, 105, 3))
+
+    # Positive image in the network
+    positive_image = Input(name='positive_img', shape=(105, 105, 3))
+
+    # Negative image in the network
+    negative_image = Input(name='negative_img', shape=(105, 105, 3))
+
+    # Combine triplet distance components
+    positive_distance = L1Dist()([embedding(input_image),
+                                  embedding(positive_image)])
+    negative_distance = L1Dist()([embedding(input_image),
+                                  embedding(negative_image)])
+
+    # Classification layer
+    classifier = Dense(1, activation='sigmoid')(positive_distance -
+                                                negative_distance)
+    
+    return Model(inputs=[input_image, positive_image, negative_image],
+                    outputs=classifier, name='TripletNetwork')  
