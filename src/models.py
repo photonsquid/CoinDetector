@@ -1,5 +1,6 @@
 from keras.layers import Conv2D, Dense, Flatten, Input, MaxPooling2D
 from keras.models import Model
+from keras.layers.merge import subtract
 
 from src.l1_dist import L1Dist
 
@@ -70,8 +71,7 @@ def make_triplet_model(embedding):
                                             embedding(negative_image))
 
     # Classification layer
-    classifier = Dense(1, activation='sigmoid')(positive_distance -
-                                                negative_distance)
+    classifier = Dense(1, activation='sigmoid')(subtract([positive_distance, negative_distance]))
     
     return Model(inputs=[input_image, positive_image, negative_image],
                     outputs=classifier, name='TripletNetwork')  
