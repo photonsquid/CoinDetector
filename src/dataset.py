@@ -77,8 +77,6 @@ def create_pairs(dataset, size=(105, 105)):
     validation_imgs = []
     computed_labels = []
     anchor_imgs = []
-    validation_imgs = []
-    computed_labels = []
 
     for country in countries:
         for coin_value in coin_values:
