@@ -209,8 +209,8 @@ def create_triplets(dataset, size=(105, 105)):
                     # randomly choose a positive and a negative image
                     list_of_images = list(
                         images[country][coin_value][coin_specificity])
-                    positive_img = None
-                    negative_img = None
+                    positive_image = None
+                    negative_image = None
                     while True:
                         # get a random image from the same country, same coin_value and same_specificity
                         positive_img_id = random.choice(
@@ -240,33 +240,33 @@ def create_triplets(dataset, size=(105, 105)):
 
                     # Assign the images to the variables
                     anchor_image = images[country][coin_value][coin_specificity][image_id]
-                    positive_img = images[country][coin_value][coin_specificity][positive_img_id]
-                    negative_img = images[random_country][random_coin_value][random_coin_specificity][negative_img_id]
+                    positive_image = images[country][coin_value][coin_specificity][positive_img_id]
+                    negative_image = images[random_country][random_coin_value][random_coin_specificity][negative_img_id]
 
                     # remove the alpha channel
                     anchor_image = anchor_image.convert("RGB")
-                    positive_img = positive_img.convert("RGB")
-                    negative_img = negative_img.convert("RGB")
+                    positive_image = positive_image.convert("RGB")
+                    negative_image = negative_image.convert("RGB")
 
                     # resize the images
                     anchor_image = anchor_image.resize(size)
-                    positive_img = positive_img.resize(size)
-                    negative_img = negative_img.resize(size)
+                    positive_image = positive_image.resize(size)
+                    negative_image = negative_image.resize(size)
 
                     # convert the images to numpy arrays
                     anchor_image = np.array(anchor_image)
-                    positive_img = np.array(positive_img)
-                    negative_img = np.array(negative_img)
+                    positive_image = np.array(positive_image)
+                    negative_image = np.array(negative_image)
 
                     # scale down the images
                     anchor_image = anchor_image / 255
-                    positive_img = positive_img / 255
-                    negative_img = negative_img / 255
+                    positive_image = positive_image / 255
+                    negative_image = negative_image / 255
 
                     # add the triplet to the images_triplets list
                     anchor_imgs.append(anchor_image)
-                    positive_imgs.append(positive_img)
-                    negative_imgs.append(negative_img)
+                    positive_imgs.append(positive_image)
+                    negative_imgs.append(negative_image)
 
     return anchor_imgs, positive_imgs, negative_imgs
 
