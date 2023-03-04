@@ -203,79 +203,70 @@ def create_triplets(dataset, size=(105, 105)):
             # get list of all specificities for the current coin
             coin_specificities = images[country][coin_value]
             for coin_specificity in coin_specificities:
-                variants = images[country][coin_value][coin_specificity]         
+                variant_ids = images[country][coin_value][coin_specificity]         
                        
-                for image_id in variants:
+                for image_id in variant_ids:
                     # randomly choose a positive and a negative image
                     list_of_images = list(
                         images[country][coin_value][coin_specificity])
                     positive_img = None
                     negative_img = None
+                    while True:
+                        # get a random image from the same country, same coin_value and same_specificity
+                        positive_img_id = random.choice(
+                            list_of_images)
+                        # check if the id is different
+                        if positive_img_id != image_id:
+                            # if different, break the loop
+                            break
 
-                    # if positive, same country, same coin_value and same_specificity, but different id
-                    # we need to randomly choose a different id
-                    if len(list_of_images) == 2:
-                        # if there are only two images, the positive image is the one with the different id
-                        positive_img = list_of_images[1] # wait
-                        negative_img = list_of_images[0]
-                        validation_image = images[country][coin_value][coin_specificity][image_id]
-                    else:
-                        while True:
-                            # get a random image from the same country, same coin_value and same_specificity
-                            validation_image_id = random.choice(
-                                list_of_images)
-                            # check if the id is different
-                            if validation_image_id != image_id:
-                                # if different, break the loop
-                                break
-                        validation_image = images[country][coin_value][coin_specificity][validation_image_id]
-                    else:
-                        # if negative, at least one different attribute (country, coin_value, coin_specificity)
-                        computed_label = 0
+                    while True:
+                        # get a random country
+                        random_country = random.choice(countries)
+                        # get a random coin_value
+                        random_coin_value = random.choice(coin_values)
+                        # get a random coin_specificity of the random coin_value of the random country
+                        random_coin_specificity = random.choice(
+                            list(images[random_country][random_coin_value]))
 
-                        while True:
-                            # get a random country
-                            random_country = random.choice(countries)
-                            # get a random coin_value
-                            random_coin_value = random.choice(coin_values)
-                            # get a random coin_specificity of the random coin_value of the random country
-                            random_coin_specificity = random.choice(
-                                list(images[random_country][random_coin_value]))
+                        # get a random image from the random country, random coin_value and random coin_specificity
+                        negative_img_id = random.choice(
+                            list(images[random_country][random_coin_value][random_coin_specificity]))
 
-                            # get a random image from the random country, random coin_value and random coin_specificity
-                            validation_image_id = random.choice(
-                                list(images[random_country][random_coin_value][random_coin_specificity]))
+                        # check if the country is different
+                        if random_country != country or random_coin_value != coin_value or random_coin_specificity != coin_specificity:
+                            # if different, break the loop
+                            break
 
-                            # check if the country is different
-                            if random_country != country or random_coin_value != coin_value or random_coin_specificity != coin_specificity:
-                                # if different, break the loop
-                                break
-                        validation_image = images[random_country][random_coin_value][random_coin_specificity][validation_image_id]
+                    # Assign the images to the variables
                     anchor_image = images[country][coin_value][coin_specificity][image_id]
+                    positive_img = images[country][coin_value][coin_specificity][positive_img_id]
+                    negative_img = images[random_country][random_coin_value][random_coin_specificity][negative_img_id]
 
                     # remove the alpha channel
                     anchor_image = anchor_image.convert("RGB")
-                    validation_image = validation_image.convert("RGB")
+                    positive_img = positive_img.convert("RGB")
+                    negative_img = negative_img.convert("RGB")
 
                     # resize the images
                     anchor_image = anchor_image.resize(size)
-                    validation_image = validation_image.resize(size)
+                    positive_img = positive_img.resize(size)
+                    negative_img = negative_img.resize(size)
 
                     # convert the images to numpy arrays
                     anchor_image = np.array(anchor_image)
-                    validation_image = np.array(validation_image)
+                    positive_img = np.array(positive_img)
+                    negative_img = np.array(negative_img)
 
                     # scale down the images
                     anchor_image = anchor_image / 255
-                    validation_image = validation_image / 255
+                    positive_img = positive_img / 255
+                    negative_img = negative_img / 255
 
-                    # add the pair to the images_pairs list
+                    # add the triplet to the images_triplets list
                     anchor_imgs.append(anchor_image)
-                    validation_imgs.append(validation_image)
-                    computed_labels.append(computed_label)
-                    anchor_imgs.append(anchor_image)
-                    validation_imgs.append(validation_image)
-                    computed_labels.append(computed_label)
+                    positive_imgs.append(positive_img)
+                    negative_imgs.append(negative_img)
 
     return anchor_imgs, validation_imgs, computed_labels
 
