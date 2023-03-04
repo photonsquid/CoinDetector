@@ -1,6 +1,6 @@
 # Recoinize - Coin recognition made easy
 
-## Motivation
+## Motivation 
 
 The field of computer vision has made significant progress in recent years, enabling machines to recognize and understand visual content to a greater extent than ever before. One particular area of interest is object recognition, which involves identifying and categorizing objects in digital images. However, even with state-of-the-art algorithms and techniques, coin recognition remains a challenging problem due to the complexity and variability of the coins.
 
@@ -19,19 +19,15 @@ The main struggle that this project came with, was the absolute lack of usable p
 
 After careful consideration of the pros and cons of each alternative which came to mind, it was deemed best to generate images using a **rendering software** such as Blender. We scrapped hundreds of coins from the internet (more specifically from the European Central bank's website), cut out the excess background, and programatically generated textures for our coin 3d models using **Hough circle detection** to crop the images to the correct shape.
 
-![[at_2euro.jpg|340]] 
-*Fig. 1: Original image scrapped from the ECB website* 
-
-![[at_2euro.texture.png]]
-*Fig. 2: Programmatically generated cylinder texture*
+|![[at_2euro.jpg\|340]]|![[at_2euro.texture.png]]|
+|---------------------|------------------------|
+|*Fig. 1: Original image scrapped from the ECB website* | *Fig. 2: Programmatically generated cylinder texture* |
 
 A blender scene consisting of a high resolution cylinder (representing the coin) and a rectangular parallelepiped (which acts as the ground/table upon which the coin lies) will be used to generate the different shots. 
 
-![[scene_wireframe.png]]
-*Fig. 3: Wireframe view of the scene*
-
-![[scene_rendered.png]]
-*Fig. 4: Rendered view of the scene* 
+|![[scene_wireframe.png]] | ![[scene_rendered.png]] |
+|--------------|----------------|
+| *Fig. 3: Wireframe view of the scene* | *Fig. 4: Rendered view of the scene*  |
 
 The rendering process is fully automated using a python script, which single-handedly randomizes the camera position (whose frustum is visible in *Fig. 3* & *Fig. 4*), the lighting, the concrete texture in the background, and the amount of rust on the surface of the coin, using shaders. This process of randomization and rendering is executed $X$ amount of times for each coin, where $X$ is a predefined constant, which enables the generation of a nearly infinite amount of images from just a couple of pictures downloaded from the Internet.
 
@@ -97,6 +93,7 @@ Overall, the use of a siamese or triplet architecture for coin recognition has t
 
 ## Implementation
 
+> [!question]
 > *How did you implement your approach? which tools were used? show interesting snippets or present your algorithms*
 
 In this approach, the loss function for the triplet training structure is as follows:
@@ -106,11 +103,15 @@ $$
 
 where $a$ is the anchor input, $p$ is the positive input, $n$ is the negative input, $d$ is a distance function (such as Euclidean distance), and $\alpha$ is a margin parameter
 
-
 ## Evaluation
 
+> [!question]
 > *Present and visualize results of your evaluation, explain what do your results mean, why was your approach successful, why not? compare it to some baseline either implemented yourself or from the literature, blogs, Kaggle, etc.*
 
 ## Conclusion
 
+> [!question]
 > *How can you evaluate the results of your work? what would you recommend for future steps?*
+
+
+[^1]: add this before sending
