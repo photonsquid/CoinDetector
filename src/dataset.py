@@ -203,7 +203,8 @@ def create_triplets(dataset, size=(105, 105)):
             # get list of all specificities for the current coin
             coin_specificities = images[country][coin_value]
             for coin_specificity in coin_specificities:
-                variants = images[country][coin_value][coin_specificity]                
+                variants = images[country][coin_value][coin_specificity]         
+                       
                 for image_id in variants:
                     # randomly choose a positive and a negative image
                     list_of_images = list(
