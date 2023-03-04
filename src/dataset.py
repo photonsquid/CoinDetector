@@ -36,7 +36,7 @@ def create_pairs(dataset, size=(105, 105)):
     #       ]
     #   }
 
-    # firsr, iterate over the dataset and create the images dictionary, the countries and coin_values lists
+    # first, iterate over the dataset and create the images dictionary, the countries and coin_values lists
 
     images = {}
     countries = []
@@ -86,7 +86,7 @@ def create_pairs(dataset, size=(105, 105)):
             coin_specificities = images[country][coin_value]
             for coin_specificity in coin_specificities:
                 for image_id in images[country][coin_value][coin_specificity]:
-                    # randmoly choose a positive or negative image
+                    # randomly choose a positive or negative image
                     list_of_images = list(
                         images[country][coin_value][coin_specificity])
                     positive = random.choice([True, False])
@@ -160,39 +160,6 @@ def create_pairs(dataset, size=(105, 105)):
 
 
 def create_triplets(dataset, size=(105, 105)):
-
-    # input
-
-    # dataset = [
-    #   {
-    #       image: <image>,
-    #       label:{
-    #           country: <country>,
-    #           value: <value>,
-    #           specificity: <specificity>,
-    #           id: <id>,
-    #       }
-    #   },
-    #   ...
-    # ]
-
-    # output
-    # images = {
-    #       <country_name>:{
-    #          <coin_value>:{
-    #               <edition_name>: [
-    #                   {
-    #                           image: <image>,
-    #                           variant: <id>
-    #                   },
-    #                   ...
-    #               ]
-    #           },
-    #           ...
-    #       ]
-    #   }
-
-    # firsr, iterate over the dataset and create the images dictionary, the countries and coin_values lists
 
     images = {}
     countries = []
