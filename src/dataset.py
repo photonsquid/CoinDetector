@@ -4,7 +4,7 @@ import random
 import numpy as np
 
 
-def create_pairs(dataset, size=(105, 105)):
+def create_triplets(dataset, size=(105, 105)):
 
     # input
 
@@ -171,5 +171,5 @@ if __name__ == "__main__":
         from datasets.load import load_dataset
         dataset = load_dataset('photonsquid/coins-euro')
     # create the pairs
-    anchor_imgs, validation_imgs, computed_labels = create_pairs(
+    anchor_imgs, validation_imgs, computed_labels = create_triplets(
         dataset['test'])
