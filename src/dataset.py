@@ -268,7 +268,7 @@ def create_triplets(dataset, size=(105, 105)):
                     positive_imgs.append(positive_img)
                     negative_imgs.append(negative_img)
 
-    return anchor_imgs, validation_imgs, computed_labels
+    return anchor_imgs, positive_imgs, negative_imgs
 
 
 if __name__ == "__main__":
