@@ -59,15 +59,8 @@ def make_triplet_model(embedding):
     negative_image = Input(name='negative_img', shape=(105, 105, 3))
 
     # Combine triplet distance components
-    positive_distance = L1Dist()
-    positive_distance._name = 'positive_distance'
-    positive_distance = positive_distance(embedding(input_image),
-                                            embedding(positive_image))
-    
-    negative_distance = L1Dist()
-    negative_distance._name = 'negative_distance'
-    negative_distance = negative_distance(embedding(input_image),
-                                            embedding(negative_image))
+    positive_distance = L1Dist()([embedding(input_image), embedding(positive_image)])
+    negative_distance = L1Dist()([embedding(input_image), embedding(negative_image)])
 
     # Classification layer
     classifier = Dense(1, activation='sigmoid')(subtract([positive_distance, negative_distance]))
