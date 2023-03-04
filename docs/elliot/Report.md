@@ -131,6 +131,16 @@ positive_img = positive_img / 255
 negative_img = negative_img / 255
 ```
 
+### Hyperparameters
+
+
+
+```chart
+    type: line
+    id: board
+    file: Tensorboard
+```
+
 In this approach, the loss function for the triplet training structure is as follows:
 $$
 \begin{equation} L(a,p,n) = \max(0, d(a,p) - d(a,n) + \alpha) \end{equation}
@@ -149,4 +159,4 @@ where $a$ is the anchor input, $p$ is the positive input, $n$ is the negative in
 > *How can you evaluate the results of your work? what would you recommend for future steps?*
 
 
-[^1]: add this before sending
+[^1]: [2015 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)2015 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)](https://ieeexplore.ieee.org/document/7298682)
