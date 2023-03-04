@@ -1,6 +1,5 @@
-from keras.layers import Conv2D, Dense, Flatten, Input, MaxPooling2D
+from keras.layers import Conv2D, Dense, Flatten, Input, MaxPooling2D, subtract
 from keras.models import Model
-from keras.layers.merge import subtract
 
 from src.l1_dist import L1Dist
 
