@@ -194,9 +194,9 @@ def create_triplets(dataset, size=(105, 105)):
     # now that we have the images dictionary, the countries and coin_values lists
     # we can create the pairs
 
-    anchor_imgs = []
-    positive_imgs = []
-    negative_imgs = []
+    anchor_images = []
+    positive_images = []
+    negative_images = []
 
     for country in countries:
         for coin_value in coin_values:
@@ -264,11 +264,11 @@ def create_triplets(dataset, size=(105, 105)):
                     negative_image = negative_image / 255
 
                     # add the triplet to the images_triplets list
-                    anchor_imgs.append(anchor_image)
-                    positive_imgs.append(positive_image)
-                    negative_imgs.append(negative_image)
+                    anchor_images.append(anchor_image)
+                    positive_images.append(positive_image)
+                    negative_images.append(negative_image)
 
-    return anchor_imgs, positive_imgs, negative_imgs
+    return anchor_images, positive_images, negative_images
 
 
 if __name__ == "__main__":

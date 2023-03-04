@@ -133,7 +133,7 @@ negative_img = negative_img / 255
 
 ### Model architecture
 
-As a triplet model, the network is composed of three identical subnetworks that share the same weights and are trained jointly using triplets of images as inputs. Each subnetwork is a CNN whose architecture is defined by the `make_embedding` function below:
+As a triplet model, the network is composed of three identical subnetworks that share the same weights and are trained jointly using triplets of images as inputs. Each subnetwork is a CNN whose architecture is defined by the `make_embedding` function, whose code is detailed below.
 
 ```python
 def make_embedding():
@@ -159,11 +159,38 @@ def make_embedding():
     return Model(inputs=[inp], outputs=[d1], name='embedding')
 ```
 
-```chart
-    type: line
-    id: board
-    file: Tensorboard
+The triplet structure is then assembled by the `make_triplet_model` function, which handles the calculation of the distance between the feature vectors that the CNN outputs. It is defined in the same module as `make_embedding` and consists of the following instructions:
+```python
+def make_triplet_model(embedding):
+    # Anchor image input in the network
+    input_image = Input(name='input_img', shape=(105, 105, 3))
+  
+    # Positive image in the network
+    positive_image = Input(name='positive_img', shape=(105, 105, 3))
+
+    # Negative image in the network
+    negative_image = Input(name='negative_img', shape=(105, 105, 3))
+
+    # Combine triplet distance components
+    positive_distance = L1Dist()
+    positive_distance._name = 'positive_distance'
+    positive_distance = positive_distance(embedding(input_image),
+                                            embedding(positive_image))
+	negative_distance = L1Dist()
+    negative_distance._name = 'negative_distance'
+    negative_distance = negative_distance(embedding(input_image),
+                                            embedding(negative_image))
+    # Classification layer
+    classifier = Dense(1, activation='sigmoid')(subtract([positive_distance, negative_distance]))
+    return Model(inputs=[input_image, positive_image, negative_image],
+                    outputs=classifier, name='TripletNetwork')
 ```
+
+
+## Evaluation
+
+> [!question]
+> *Present and visualize results of your evaluation, explain what do your results mean, why was your approach successful, why not? compare it to some baseline either implemented yourself or from the literature, blogs, Kaggle, etc.
 
 In this approach, the loss function for the triplet training structure is as follows:
 $$
@@ -172,11 +199,6 @@ $$
 
 where $a$ is the anchor input, $p$ is the positive input, $n$ is the negative input, $d$ is a distance function (such as Euclidean distance), and $\alpha$ is a margin parameter
 
-## Evaluation
-
-> [!question]
-> *Present and visualize results of your evaluation, explain what do your results mean, why was your approach successful, why not? compare it to some baseline either implemented yourself or from the literature, blogs, Kaggle, etc.*
-
 ## Conclusion
 
 > [!question]
@@ -184,3 +206,71 @@ where $a$ is the anchor input, $p$ is the positive input, $n$ is the negative in
 
 
 [^1]: [2015 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)2015 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)](https://ieeexplore.ieee.org/document/7298682)
+> [!failure]- Failure 
+>   Error: Request failed, status 429
+>   
+>   - app.js:1 new t
+>     app://obsidian.md/app.js:1:717762
+>   
+>   - app.js:1 Jw
+>     app://obsidian.md/app.js:1:717954
+>   
+>   - app.js:1 
+>     app://obsidian.md/app.js:1:718631
+>   
+>   - app.js:1 
+>     app://obsidian.md/app.js:1:235836
+>   
+>   - app.js:1 Object.next
+>     app://obsidian.md/app.js:1:235941
+>   
+>   - app.js:1 a
+>     app://obsidian.md/app.js:1:234680
+>   
+>  
+
+> [!failure]- Failure 
+>   Error: Request failed, status 429
+>   
+>   - app.js:1 new t
+>     app://obsidian.md/app.js:1:717762
+>   
+>   - app.js:1 Jw
+>     app://obsidian.md/app.js:1:717954
+>   
+>   - app.js:1 
+>     app://obsidian.md/app.js:1:718631
+>   
+>   - app.js:1 
+>     app://obsidian.md/app.js:1:235836
+>   
+>   - app.js:1 Object.next
+>     app://obsidian.md/app.js:1:235941
+>   
+>   - app.js:1 a
+>     app://obsidian.md/app.js:1:234680
+>   
+>  
+
+> [!failure]- Failure 
+>   Error: Request failed, status 429
+>   
+>   - app.js:1 new t
+>     app://obsidian.md/app.js:1:717762
+>   
+>   - app.js:1 Jw
+>     app://obsidian.md/app.js:1:717954
+>   
+>   - app.js:1 
+>     app://obsidian.md/app.js:1:718631
+>   
+>   - app.js:1 
+>     app://obsidian.md/app.js:1:235836
+>   
+>   - app.js:1 Object.next
+>     app://obsidian.md/app.js:1:235941
+>   
+>   - app.js:1 a
+>     app://obsidian.md/app.js:1:234680
+>   
+>  
