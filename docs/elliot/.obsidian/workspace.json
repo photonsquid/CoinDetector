@@ -134,8 +134,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -149,17 +148,22 @@
   },
   "active": "c0a60d6b4fd2e4ef",
   "lastOpenFiles": [
+    "at_2euro_1_mask.png",
+    "ad_10cents_2_mask.png",
+    "ad_5cents_3_mask.png",
+    "at_2cents_6.png",
+    "Report.md",
+    "res/rendered/at_2euro_1.png",
+    "res/rendered/ad_10cents_2.png",
+    "res/rendered",
+    "res/rendered/ad_5cents_3.png",
     "Motivation.md",
     "res/scene_wireframe.png",
-    "Report.md",
     "res/at_2euro.texture.png",
     "Report.pdf",
     "res/scene_rendered.png",
     "res/at_2euro.jpg",
-    "at_2euro.dmap.png",
-    "ad_2cents.dmap.png",
     "Untitled.canvas",
-    "Pasted image 20230302182056.png",
     "2023-03-02.md",
     "res"
   ]
