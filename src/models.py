@@ -48,7 +48,6 @@ def make_siamese_model(embedding):
 
 
 def make_triplet_model(embedding):
-
     # Anchor image input in the network
     input_image = Input(name='input_img', shape=(105, 105, 3))
 
