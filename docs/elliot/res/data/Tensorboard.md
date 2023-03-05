@@ -1,4 +1,4 @@
-#raw #machine-learning
+#raw #machine-learning #tensorflow #tensorboard #loss
 
 | Epoch | Training Loss | Validation Loss |
 |-------|---------------|----------------|

@@ -1,5 +1,7 @@
 # Recoinize - Coin recognition made easy
 
+#keras #tensorflow #machine-learning #coin-recognition
+
 ## Motivation 
 
 The field of computer vision has made significant progress in recent years, enabling machines to recognize and understand visual content to a greater extent than ever before. One particular area of interest is object recognition, which involves identifying and categorizing objects in digital images. However, even with state-of-the-art algorithms and techniques, coin recognition remains a challenging problem due to the complexity and variability of the coins.
@@ -54,7 +56,11 @@ Some examples of coins rendered in blender can be seen below, along their associ
 | Render | ![[ad_5cents_3.png]]  | ![[at_2euro_1.png]]| ![[ad_10cents_2.png]] |
 | Mask | ![[ad_5cents_3_mask.png]] | ![[at_2euro_1_mask.png]] | ![[ad_10cents_2_mask.png]] |
 
-Once created and correctly formatted, the dataset is then compiled and sent to Hugginface, where it is now [publicly available for download](https://huggingface.co/datasets/photonsquid/coins-euro). This allows for a completely separation of the machines that generate the dataset from the ones that use it, thus achieving a dynamic and clean overall pipeline architecture.
+Once created and correctly formatted, the dataset is then compiled and sent to Hugginface, where it is now [publicly available for download](https://huggingface.co/datasets/photonsquid/coins-euro). This allows for a completely separation of the machines that generate the dataset from the ones that use it, thus achieving a dynamic and clean overall pipeline architecture. 
+
+The  flowchart below illustrates the overall layout of the infrastructure set up for this project, featuring ==GitHub== (Code hosting), ==Paperspace== (GPUs and cloud computing) and ==Huggingface== (Dataset and model storage). 
+
+![[Workflow]]
 
 ## Theoretical background
 
@@ -160,6 +166,7 @@ def make_embedding():
 ```
 
 The triplet structure is then assembled by the `make_triplet_model` function, which handles the calculation of the distance between the feature vectors that the CNN outputs. It is defined in the same module as `make_embedding` and consists of the following instructions:
+
 ```python
 def make_triplet_model(embedding):
     # Anchor image input in the network
@@ -186,11 +193,14 @@ def make_triplet_model(embedding):
                     outputs=classifier, name='TripletNetwork')
 ```
 
+Once the model is properly built, and its training structure fully assembled, it is necessary to train it on the previously created dataset. A step which we will be exploring in the following paragraph.
 
 ## Evaluation
 
 > [!question]
 > *Present and visualize results of your evaluation, explain what do your results mean, why was your approach successful, why not? compare it to some baseline either implemented yourself or from the literature, blogs, Kaggle, etc.
+
+We will now analyze the results obtained from the training of the triplet model. The training process is carried out in the `train` module, where the `train_triplet_model` function is defined. This function is responsible for training the model on the dataset generated in the previous section. The code below shows the main steps of the training process.
 
 In this approach, the loss function for the triplet training structure is as follows:
 $$
@@ -206,71 +216,3 @@ where $a$ is the anchor input, $p$ is the positive input, $n$ is the negative in
 
 
 [^1]: [2015 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)2015 IEEE Conference on Computer Vision and Pattern Recognition (CVPR)](https://ieeexplore.ieee.org/document/7298682)
-> [!failure]- Failure 
->   Error: Request failed, status 429
->   
->   - app.js:1 new t
->     app://obsidian.md/app.js:1:717762
->   
->   - app.js:1 Jw
->     app://obsidian.md/app.js:1:717954
->   
->   - app.js:1 
->     app://obsidian.md/app.js:1:718631
->   
->   - app.js:1 
->     app://obsidian.md/app.js:1:235836
->   
->   - app.js:1 Object.next
->     app://obsidian.md/app.js:1:235941
->   
->   - app.js:1 a
->     app://obsidian.md/app.js:1:234680
->   
->  
-
-> [!failure]- Failure 
->   Error: Request failed, status 429
->   
->   - app.js:1 new t
->     app://obsidian.md/app.js:1:717762
->   
->   - app.js:1 Jw
->     app://obsidian.md/app.js:1:717954
->   
->   - app.js:1 
->     app://obsidian.md/app.js:1:718631
->   
->   - app.js:1 
->     app://obsidian.md/app.js:1:235836
->   
->   - app.js:1 Object.next
->     app://obsidian.md/app.js:1:235941
->   
->   - app.js:1 a
->     app://obsidian.md/app.js:1:234680
->   
->  
-
-> [!failure]- Failure 
->   Error: Request failed, status 429
->   
->   - app.js:1 new t
->     app://obsidian.md/app.js:1:717762
->   
->   - app.js:1 Jw
->     app://obsidian.md/app.js:1:717954
->   
->   - app.js:1 
->     app://obsidian.md/app.js:1:718631
->   
->   - app.js:1 
->     app://obsidian.md/app.js:1:235836
->   
->   - app.js:1 Object.next
->     app://obsidian.md/app.js:1:235941
->   
->   - app.js:1 a
->     app://obsidian.md/app.js:1:234680
->   
->  
