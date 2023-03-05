@@ -200,7 +200,7 @@ Once the model is properly built, and its training structure fully assembled, it
 > [!question]
 > *Present and visualize results of your evaluation, explain what do your results mean, why was your approach successful, why not? compare it to some baseline either implemented yourself or from the literature, blogs, Kaggle, etc.
 
-We will now analyze the results obtained from the training of the triplet model. The training process is carried out 
+We will now analyze the results obtained from the training of the triplet model. The training process is carried out #unfinished-business
 
 In this approach, the loss function for the triplet training structure is as follows:
 $$
