@@ -8,5 +8,6 @@
         "cmd": "git add -A && git commit -m \"auto: update ${fileBasename}\" && git push"
       },
     ]
-  }
+  },
+  "jupyter.kernels.filter": []
 }
